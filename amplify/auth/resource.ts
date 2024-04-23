@@ -1,4 +1,4 @@
-import { defineAuth } from '@aws-amplify/backend';
+import { defineAuth, secret } from '@aws-amplify/backend';
 
 /**
  * Define and configure your auth resource
@@ -8,21 +8,22 @@ import { defineAuth } from '@aws-amplify/backend';
 export const auth = defineAuth({
   loginWith: {
     email: true,
-    // add social providers
-    // externalProviders: {
-    /**
-     * first, create your secrets using `amplify sandbox secret`
-     * then, import `secret` from `@aws-amplify/backend`
-     * @see https://docs.amplify.aws/gen2/deploy-and-host/sandbox-environments/features/#setting-secrets
-     */
-    // loginWithAmazon: {
-    //   clientId: secret('LOGINWITHAMAZON_CLIENT_ID'),
-    //   clientSecret: secret('LOGINWITHAMAZON_CLIENT_SECRET'),
-    // }
-    // configure callback and logout URLs
-    // callbackUrls: ['http://localhost:3000'],
-    // logoutUrls: ['http://localhost:3000'],
-    // },
+    externalProviders: {
+      signInWithApple: {
+        clientId: secret('SIWA_CLIENT_ID'),
+        keyId: secret('SIWA_KEY_ID'),
+        privateKey: secret('SIWA_PRIVATE_KEY'),
+        teamId: secret('SIWA_TEAM_ID'),
+	scopes: ['email'],
+      },
+      callbackUrls: [
+        'http://localhost:3000/profile',
+        'https://main.devd8xbmv7r1p.amplifyapp.com/profile'
+      ],
+      logoutUrls: ['http://localhost:3000/', 'https://main.devd8xbmv7r1p.amplifyapp.com'],
+      // This required value will be prepended to `.auth.us-west-2.amazoncognito.com` and used for your application's oauth url
+      domainPrefix: 'riffhaus'
+    }
   },
   /**
    * enable multifactor authentication

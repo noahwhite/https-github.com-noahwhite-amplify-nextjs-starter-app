@@ -18,9 +18,9 @@ export const auth = defineAuth({
       },
       callbackUrls: [
         'http://localhost:3000/profile',
-        'https://main.devd8xbmv7r1p.amplifyapp.com/profile'
+        'https://main.d2eui6za3q4xqc.amplifyapp.com/profile'
       ],
-      logoutUrls: ['http://localhost:3000/', 'https://main.devd8xbmv7r1p.amplifyapp.com'],
+      logoutUrls: ['http://localhost:3000/', 'https://main.d2eui6za3q4xqc.amplifyapp.com'],
       // This required value will be prepended to `.auth.us-west-2.amazoncognito.com` and used for your application's oauth url
       domainPrefix: 'riffhaus'
     }
